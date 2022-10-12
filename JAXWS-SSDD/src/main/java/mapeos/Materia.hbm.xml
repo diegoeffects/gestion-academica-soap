@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name = "datos.Materia" table = "materias">
+
+	<id column="idMateria" name="idMateria">
+	<generator class="identity"/>
+	</id>
+	
+	<many-to-one name = "carrera" class = "datos.Carrera" column = "idCarrera" not-null = "true"/>	
+	<property column="materia" name="materia" type="string"/>
+	<property column="anioCarrera" name="anioCarrera" type="int"/>
+
+</class>
+</hibernate-mapping>
