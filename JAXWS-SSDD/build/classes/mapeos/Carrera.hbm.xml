@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name = "datos.Carrera" table = "carreras">
+
+	<id column="idCarrera" name="idCarrera">
+	<generator class="identity"/>
+	</id>
+	
+	<property column="carrera" name="carrera" type="string"/>
+
+</class>
+</hibernate-mapping>
