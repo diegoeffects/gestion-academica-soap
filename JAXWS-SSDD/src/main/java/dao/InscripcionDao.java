@@ -1,6 +1,8 @@
 package dao;
 
 import java.util.List;
+
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -46,6 +48,9 @@ public class InscripcionDao {
 		try {
 			iniciaOperacion();
 			lista = session.createQuery("from Inscripcion").list();
+			for (Inscripcion inscripcion : lista) {
+			     Hibernate.initialize(inscripcion.getInstancia());
+			}
 		}
 		catch (HibernateException he) {
 			manejaExcepcion(he);
