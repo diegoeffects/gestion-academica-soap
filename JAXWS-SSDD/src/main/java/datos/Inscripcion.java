@@ -7,21 +7,21 @@ public class Inscripcion {
 	private String descripcion;
 	private String desde;
 	private String hasta;
-	private String fecha;
-	private String fechaCierre;
+	private String fechaInicio;
+	private String fechaFin;
 	private String anio;
 	
 	public Inscripcion() {} // CONSTRUCTOR HIBERNATE
 
-	public Inscripcion(Instancia instancia, String descripcion, String desde, String hasta, String fecha,
-			String fechaCierre, String anio) {
+	public Inscripcion(Instancia instancia, String descripcion, String desde, String hasta, String fechaInicio,
+			String fechaFin, String anio) {
 		super();
 		this.instancia = instancia;
 		this.descripcion = descripcion;
 		this.desde = desde;
 		this.hasta = hasta;
-		this.fecha = fecha;
-		this.fechaCierre = fechaCierre;
+		this.fechaInicio = fechaInicio;
+		this.fechaFin = fechaFin;
 		this.anio = anio;
 	}
 
@@ -65,20 +65,20 @@ public class Inscripcion {
 		this.hasta = hasta;
 	}
 
-	public String getFecha() {
-		return fecha;
+	public String getFechaInicio() {
+		return fechaInicio;
 	}
 
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
+	public void setFechaInicio(String fechaInicio) {
+		this.fechaInicio = fechaInicio;
 	}
 
-	public String getFechaCierre() {
-		return fechaCierre;
+	public String getFechaFin() {
+		return fechaFin;
 	}
 
-	public void setFechaCierre(String fechaCierre) {
-		this.fechaCierre = fechaCierre;
+	public void setFechaFin(String fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 
 	public String getAnio() {
@@ -91,8 +91,9 @@ public class Inscripcion {
 
 	@Override
 	public String toString() {
-		return "Inscripcion [idInscripcion=" + idInscripcion + ", descripcion=" + descripcion + ", desde=" + desde
-				+ ", hasta=" + hasta + ", fecha=" + fecha + ", fechaCierre=" + fechaCierre + ", anio=" + anio + "]";
+		return "Inscripcion [idInscripcion=" + idInscripcion + ", instancia=" + instancia + ", descripcion="
+				+ descripcion + ", desde=" + desde + ", hasta=" + hasta + ", fechaInicio=" + fechaInicio + ", fechaFin="
+				+ fechaFin + ", anio=" + anio + "]";
 	}
 	
 }

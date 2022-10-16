@@ -11,11 +11,12 @@ public class Comision {
 	private String rangoHorario;
 	private int comision;
 	private String anio;
+	private String fecha;
 	
 	public Comision() {} // CONSTRUCTOR HIBERNATE
 
 	public Comision(Inscripcion inscripcion, Turno turno, Materia materia, Usuario usuario, Dia dia,
-			String rangoHorario, int comision, String anio) {
+			String rangoHorario, int comision, String anio, String fecha) {
 		super();
 		this.inscripcion = inscripcion;
 		this.turno = turno;
@@ -25,6 +26,7 @@ public class Comision {
 		this.rangoHorario = rangoHorario;
 		this.comision = comision;
 		this.anio = anio;
+		this.fecha = fecha;
 	}
 
 	public int getIdComision() {
@@ -99,11 +101,19 @@ public class Comision {
 		this.anio = anio;
 	}
 
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
 	@Override
 	public String toString() {
 		return "Comision [idComision=" + idComision + ", inscripcion=" + inscripcion + ", turno=" + turno + ", materia="
 				+ materia + ", usuario=" + usuario + ", dia=" + dia + ", rangoHorario=" + rangoHorario + ", comision="
-				+ comision + ", anio=" + anio + "]";
+				+ comision + ", anio=" + anio + ", fecha=" + fecha + "]";
 	}
 	
 }

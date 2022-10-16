@@ -12,8 +12,8 @@
 	<property column="descripcion" name="descripcion" type="string"/>
 	<property column="desde" name="desde" type="string"/>
 	<property column="hasta" name="hasta" type="string"/>
-	<property column="fecha" name="fecha" type="string"/>
-	<property column="fechaCierre" name="fechaCierre" type="string"/>
+	<property column="fechaInicio" name="fechaInicio" type="string"/>
+	<property column="fechaFin" name="fechaFin" type="string"/>
 	<property column="anio" name="anio" type="string"/>
 
 </class>

@@ -16,6 +16,7 @@
 	<property column="rangoHorario" name="rangoHorario" type="string"/>
 	<property column="comision" name="comision" type="int"/>
 	<property column="anio" name="anio" type="string"/>
+	<property column="fecha" name="fecha" type="string"/>
 
 </class>
 </hibernate-mapping>
