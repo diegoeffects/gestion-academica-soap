@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name = "datos.DetalleInscripcion" table = "detalle_inscripcion">
+
+	<id column="idDetalleInscripcion" name="idDetalleInscripcion">
+	<generator class="identity"/>
+	</id>
+	
+	<many-to-one name = "inscripcion" class = "datos.Inscripcion" column = "idInscripcion" not-null = "true"/>
+	<many-to-one name = "comision" class = "datos.Comision" column = "idComision" not-null = "true"/>
+	<many-to-one name = "usuario" class = "datos.Usuario" column = "idUsuario" not-null = "true"/>
+	<property column="fechaInscripcion" name="fechaInscripcion" type="string"/>
+	<property column="baja" name="baja" type="boolean"/>
+
+</class>
+</hibernate-mapping>

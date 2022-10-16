@@ -5,10 +5,18 @@
          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     
     <servlet>
+        <servlet-name>estudiantes</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>reportes</servlet-name>
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
     </servlet>
- 
+
+    <servlet-mapping>
+        <servlet-name>estudiantes</servlet-name>
+        <url-pattern>/estudiantes</url-pattern>
+    </servlet-mapping>  
     <servlet-mapping>
         <servlet-name>reportes</servlet-name>
         <url-pattern>/reportes</url-pattern>
