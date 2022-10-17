@@ -9,8 +9,6 @@ import javax.jws.WebService;
 @WebService
 public interface Reportes {
 	
-	// ANALITICO DE ESTUDIANTE
-	
 	@WebMethod
 	public List<respuestas.HistorialAcademicoWS> traerHistorialAcademicoPorEstudiante(@WebParam(name = "idUsuario") int idUsuario);
 	
@@ -28,8 +26,14 @@ public interface Reportes {
 	// LISTADO DE MATERIAS DE UN CUATRIMESTRE POR CARRERA
 	// LISTADO DE MATERIAS DE UN LLAMADO POR CARRERA
 	
-	public List<respuestas.ComisionBWS> traerComisionesPorInscripcionYCarrera(@WebParam(name = "idInscripcion") int idInscripcion, @WebParam(name = "idCarrera") int idCarrera);
+	public List<respuestas.ComisionPlanillaWS> traerComisionesPorInscripcionYCarreraYTurno(@WebParam(name = "idInscripcion") int idInscripcion, @WebParam(name = "idCarrera") int idCarrera,
+			@WebParam(name = "idTurno") int idTurno);
 	
-	public respuestas.PlanillaMateriasWS traerCabeceraPlanillaMaterias(@WebParam(name = "idInscripcion") int idInscripcion, @WebParam(name = "idCarrera") int idCarrera);	
+	public respuestas.PlanillaMateriasWS traerCabeceraPlanillaMaterias(@WebParam(name = "idInscripcion") int idInscripcion, @WebParam(name = "idCarrera") int idCarrera,
+			@WebParam(name = "idTurno") int idTurno);
+	
+	public List<respuestas.EstudiantePlanillaWS> traerInscripcionesPorComision(@WebParam(name = "idComision") int idComision);
+	
+	public respuestas.PlanillaEstudiantesWS traerCabeceraPlanillaEstudiantes(@WebParam(name = "idComision") int idComision);
 
 }

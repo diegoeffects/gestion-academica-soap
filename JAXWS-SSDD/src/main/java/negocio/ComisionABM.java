@@ -23,5 +23,10 @@ public class ComisionABM {
 	public List<Comision> traerComisionesPorInscripcionYCarrera(int idInscripcion, int idCarrera) {
 		return dao.traerComisionesPorInscripcionYCarrera(idInscripcion, idCarrera);
 	}
+	
+	// METODO TRAER COMISIONES POR INSCRIPCION, CARRERA Y TURNO
+	public List<Comision> traerComisionesPorInscripcionYCarreraYTurno(int idInscripcion, int idCarrera, int idTurno) {
+		return dao.traerComisionesPorInscripcionYCarreraYTurno(idInscripcion, idCarrera, idTurno);
+	}
 
 }

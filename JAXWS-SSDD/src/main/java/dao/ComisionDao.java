@@ -75,4 +75,23 @@ public class ComisionDao {
 		return lista;
 	}
 	
+	// METODO TRAER COMISIONES POR INSCRIPCION, CARRERA Y TURNO
+	@SuppressWarnings("unchecked")
+	public List<Comision> traerComisionesPorInscripcionYCarreraYTurno(int idInscripcion, int idCarrera, int idTurno){
+		List<Comision> lista = null;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Comision c where c.inscripcion=" + idInscripcion +
+					"and c.materia in (from Materia m where m.carrera=" + idCarrera + ") and c.turno=" + idTurno + " order by c.dia").list();
+		}
+		catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		}
+		finally {
+			session.close();
+		}
+		return lista;
+	}
+	
 }

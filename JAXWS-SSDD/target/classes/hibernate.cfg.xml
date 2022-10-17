@@ -6,12 +6,12 @@
 <property name="hibernate.cache.use_query_cache">false</property>
 <property name="hibernate.enable_lazy_load_no_trans">true</property>
 <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-<!-- <property name="connection.url">jdbc:mysql://localhost/sga</property>
+<property name="connection.url">jdbc:mysql://localhost/sga</property>
 <property name="connection.username">root</property>
-<property name="connection.password">root</property> -->
-<property name="connection.url">jdbc:mysql://bjyszb039pnpsyqp6pjs-mysql.services.clever-cloud.com/bjyszb039pnpsyqp6pjs</property>
+<property name="connection.password">root</property>
+<!-- <property name="connection.url">jdbc:mysql://bjyszb039pnpsyqp6pjs-mysql.services.clever-cloud.com/bjyszb039pnpsyqp6pjs</property>
 <property name="connection.username">u0az4gbfi9hxljh3</property>
-<property name="connection.password">q8M7rW5I7yhyew8rW5cK</property>
+<property name="connection.password">q8M7rW5I7yhyew8rW5cK</property> -->
 <property name="connection.pool_size">1</property>
 <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 <property name="show_sql">true</property> <!-- en true muestra hql en consola-->
@@ -25,6 +25,8 @@
 <mapping resource="mapeos/Inscripcion.hbm.xml"/>
 <mapping resource="mapeos/Instancia.hbm.xml"/>
 <mapping resource="mapeos/Materia.hbm.xml"/>
+<mapping resource="mapeos/NotaComision.hbm.xml"/>
+<mapping resource="mapeos/TipoNota.hbm.xml"/>
 <mapping resource="mapeos/TipoUsuario.hbm.xml"/>
 <mapping resource="mapeos/Turno.hbm.xml"/>
 <mapping resource="mapeos/Usuario.hbm.xml"/>

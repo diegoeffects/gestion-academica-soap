@@ -25,6 +25,8 @@
 <mapping resource="mapeos/Inscripcion.hbm.xml"/>
 <mapping resource="mapeos/Instancia.hbm.xml"/>
 <mapping resource="mapeos/Materia.hbm.xml"/>
+<mapping resource="mapeos/NotaComision.hbm.xml"/>
+<mapping resource="mapeos/TipoNota.hbm.xml"/>
 <mapping resource="mapeos/TipoUsuario.hbm.xml"/>
 <mapping resource="mapeos/Turno.hbm.xml"/>
 <mapping resource="mapeos/Usuario.hbm.xml"/>

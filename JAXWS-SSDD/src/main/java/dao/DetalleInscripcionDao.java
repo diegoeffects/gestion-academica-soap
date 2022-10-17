@@ -75,6 +75,24 @@ public class DetalleInscripcionDao {
 		return lista;
 	}
 	
+	// METODO TRAER DETALLES INSCRIPCION POR COMISION
+	@SuppressWarnings("unchecked")
+	public List<DetalleInscripcion> traerDetallesInscripcionPorComision(int idComision) throws HibernateException{
+		List<DetalleInscripcion> lista = null;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from DetalleInscripcion di where di.comision=" + idComision).list();
+		}
+		catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		}
+		finally {
+			session.close();
+		}
+		return lista;
+	}
+	
 	// METODO AGREGAR DETALLE INSCRIPCION
 	public int agregarDetalleInscripcion(DetalleInscripcion detalleInscripcion){
 		int id = 0;

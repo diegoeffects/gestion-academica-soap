@@ -116,7 +116,7 @@ public class EstudiantesImpl implements Estudiantes{
 		
 		Date date = new Date(); 
 	    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
-	    String fechaActual = dateFormat.format(date);  
+	    String fechaActual = dateFormat.format(date);
 		
 		UsuarioABM usuarioABM = new UsuarioABM();
 		InscripcionABM inscripcionABM = new InscripcionABM();

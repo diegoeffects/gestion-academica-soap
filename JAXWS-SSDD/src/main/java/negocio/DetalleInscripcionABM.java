@@ -28,6 +28,11 @@ public class DetalleInscripcionABM {
 		return dao.traerDetallesInscripcionPorEstudiante(idUsuario);
 	}
 	
+	// METODO TRAER DETALLES INSCRIPCION POR COMISION
+	public List<DetalleInscripcion> traerDetallesInscripcionPorComision(int idComision){
+		return dao.traerDetallesInscripcionPorComision(idComision);
+	}
+	
 	// METODO AGREGAR DETALLE INSCRIPCION
 	public boolean agregarDetalleInscripcion(Inscripcion inscripcion, Comision comision, Usuario usuario, String fechaInscripcion, boolean baja) throws Exception {
 		
