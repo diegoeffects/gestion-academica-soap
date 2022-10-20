@@ -14,14 +14,13 @@
 <property name="connection.password">q8M7rW5I7yhyew8rW5cK</property>
 <property name="connection.pool_size">1</property>
 <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
-<property name="show_sql">true</property> <!-- en true muestra hql en consola-->
+<property name="show_sql">true</property>
 
 <!--Mapeo Entidades -->
 <mapping resource="mapeos/Carrera.hbm.xml"/>
 <mapping resource="mapeos/Comision.hbm.xml"/>
 <mapping resource="mapeos/DetalleInscripcion.hbm.xml"/>
 <mapping resource="mapeos/Dia.hbm.xml"/>
-<mapping resource="mapeos/HistorialAcademico.hbm.xml"/>
 <mapping resource="mapeos/Inscripcion.hbm.xml"/>
 <mapping resource="mapeos/Instancia.hbm.xml"/>
 <mapping resource="mapeos/Materia.hbm.xml"/>

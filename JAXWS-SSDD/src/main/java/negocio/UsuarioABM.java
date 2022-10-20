@@ -11,10 +11,14 @@ public class UsuarioABM {
 	
 	// METODO TRAER USUARIO
 	public Usuario traerUsuario(int idUsuario) {
-		
 		Usuario objeto = dao.traerUsuario(idUsuario);
 		return objeto;
-		
+	}
+	
+	// METODO TRAER ESTUDIANTE
+	public Usuario traerEstudiante(int idUsuario) {
+		Usuario objeto = dao.traerEstudiante(idUsuario);
+		return objeto;
 	}
 	
 	// METODO TRAER USUARIOS

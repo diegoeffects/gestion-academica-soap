@@ -11,10 +11,9 @@ public class NotaComision {
 	
 	public NotaComision() {} // CONSTRUCTOR HIBERNATE
 
-	public NotaComision(int idNotaComision, Comision comision, Usuario usuario, TipoNota tipoNota, int nota,
+	public NotaComision(Comision comision, Usuario usuario, TipoNota tipoNota, int nota,
 			String fecha) {
 		super();
-		this.idNotaComision = idNotaComision;
 		this.comision = comision;
 		this.usuario = usuario;
 		this.tipoNota = tipoNota;

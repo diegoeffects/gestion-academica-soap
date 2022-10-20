@@ -81,7 +81,7 @@ public class DetalleInscripcionDao {
 		List<DetalleInscripcion> lista = null;
 		try {
 			iniciaOperacion();
-			lista = session.createQuery("from DetalleInscripcion di where di.comision=" + idComision).list();
+			lista = session.createQuery("from DetalleInscripcion di where di.comision=" + idComision + " and di.baja=0").list();
 		}
 		catch (HibernateException he) {
 			manejaExcepcion(he);

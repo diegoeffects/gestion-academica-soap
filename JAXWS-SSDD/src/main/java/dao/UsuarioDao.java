@@ -42,6 +42,24 @@ public class UsuarioDao {
 		return objeto;
 	}
 	
+	// METODO TRAER traerEstudiante
+	public Usuario traerEstudiante(int idUsuario) throws HibernateException {
+		Usuario objeto = null;
+		try {
+			iniciaOperacion();
+			objeto = (Usuario) session.createQuery("from Usuario u where u.tipoUsuario = 1 and u.idUsuario = " + idUsuario).uniqueResult();
+		}
+		catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		}
+		finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
+	
 	// METODO TRAER USUARIOS
 	@SuppressWarnings("unchecked")
 	public List<Usuario> traerUsuarios() throws HibernateException{
