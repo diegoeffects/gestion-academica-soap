@@ -75,6 +75,25 @@ public class DetalleInscripcionDao {
 		return lista;
 	}
 	
+	// METODO TRAER DETALLES INSCRIPCION ACTIVAS POR ESTUDIANTE
+	@SuppressWarnings("unchecked")
+	public List<DetalleInscripcion> traerDetallesInscripcionActivasPorEstudiante(int idUsuario) throws HibernateException{
+		List<DetalleInscripcion> lista = null;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from DetalleInscripcion di where di.usuario=" + idUsuario + " and di.baja=0").list();
+		}
+		catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		}
+		finally {
+			session.close();
+		}
+		return lista;
+	}
+	
+	
 	// METODO TRAER DETALLES INSCRIPCION POR COMISION
 	@SuppressWarnings("unchecked")
 	public List<DetalleInscripcion> traerDetallesInscripcionPorComision(int idComision) throws HibernateException{

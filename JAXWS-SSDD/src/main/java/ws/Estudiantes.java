@@ -1,40 +1,46 @@
 package ws;
 
-import java.util.List;
-
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+import respuestas.RespuestaWS;
+import respuestas.InscripcionesEstudianteWS;
+import respuestas.InscripcionesWS;
+import respuestas.MateriasInscripcionCarreraWS;
+
 @WebService
 public interface Estudiantes {
 	
-	// INSCRIPCION DE UN ESTUDIANTE
-	
+	// LISTADO DE INSCRIPCIONES ACTIVAS
 	@WebMethod
-	public List<respuestas.InscripcionWS> traerInscripciones();
+	public InscripcionesWS traerInscripciones();
 	
+	// LISTADO DE INSCRIPCIONES POR ESTUDIANTE
 	@WebMethod
-	public List<respuestas.DetalleEstudianteWS> traerDetallesInscripcionPorEstudiante(@WebParam(name = "idUsuario") int idUsuario);
+	public InscripcionesEstudianteWS traerInscripcionesPorEstudiante(@WebParam(name = "idUsuario") int idUsuario);
 	
+	// LISTADO DE MATERIAS POR INSCRIPCION Y CARRERA
 	@WebMethod
-	public List<respuestas.ComisionWS> traerMateriasPorInscripcionPorCarrera(@WebParam(name = "idInscripcion") int idInscripcion, @WebParam(name = "idCarrera") int idCarrera);
+	public MateriasInscripcionCarreraWS traerMateriasPorInscripcionPorCarrera(@WebParam(name = "idInscripcion") int idInscripcion, @WebParam(name = "idCarrera") int idCarrera);
 	
+	// ALTA DE UN ESTUDIANTE EN UNA MATERIA DE UNA INSCRIPCION
 	@WebMethod
-	public boolean agregarDetalleInscripcion(@WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "idInscripcion") int idInscripcion,
+	public RespuestaWS altaInscripcionEstudiante(@WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "idInscripcion") int idInscripcion,
 			@WebParam(name = "idComision") int idComision);
 	
+	// BAJA DE UN ESTUDIANTE EN UNA MATERIA DE UNA INSCRIPCION
 	@WebMethod
-	public boolean bajaDetalleInscripcion(@WebParam(name = "idDetalleInscripcion") int idDetalleInscripcion);
+	public RespuestaWS bajaInscripcionEstudiante(@WebParam(name = "idDetalleInscripcion") int idDetalleInscripcion);
 	
-	// MODIFICACION DATOS USUARIO
-	
+	// ACTUALIZACION DATOS DE ESTUDIANTE
 	@WebMethod
-	public datos.Usuario actualizarDatosUsuario(@WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "correo") String correo,
+	public RespuestaWS actualizarDatosUsuario(@WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "correo") String correo,
 			@WebParam(name = "celular") String celular);
 	
+	// ACTUALIZACION DATOS DE ESTUDIANTE POR ADMINISTADOR
 	@WebMethod
-	public datos.Usuario actualizarDatosUsuarioPorAdministrador(@WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "nombre") String nombre,
+	public RespuestaWS actualizarDatosUsuarioPorAdministrador(@WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "nombre") String nombre,
 			@WebParam(name = "apellido") String apellido, @WebParam(name = "dni") String dni,
 			@WebParam(name = "correo") String correo, @WebParam(name = "celular") String celular);
 	

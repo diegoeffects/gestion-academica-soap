@@ -36,18 +36,18 @@ public class DetalleInscripcionABM {
 	// METODO AGREGAR DETALLE INSCRIPCION
 	public boolean agregarDetalleInscripcion(Inscripcion inscripcion, Comision comision, Usuario usuario, String fechaInscripcion, boolean baja) throws Exception {
 		
-		//boolean mismaInscripcion = false;
+		boolean mismaInscripcion = false;
 		boolean superponeDia = false;
 		boolean superponeTurno = false;
 		boolean resultado = false;
 		
-		List<DetalleInscripcion> inscripcionesEstudiante = dao.traerDetallesInscripcionPorEstudiante(usuario.getIdUsuario());
+		List<DetalleInscripcion> inscripcionesEstudiante = dao.traerDetallesInscripcionActivasPorEstudiante(usuario.getIdUsuario());
 		
 		for (int i=0; i<inscripcionesEstudiante.size(); i++) {
 			
-			//if(inscripcionesEstudiante.get(i).getComision().getInscripcion().getIdInscripcion() == comision.getInscripcion().getIdInscripcion()) {
-			//	mismaInscripcion = true;
-			//}
+			if(inscripcionesEstudiante.get(i).getComision().getInscripcion().getIdInscripcion() == comision.getInscripcion().getIdInscripcion()) {
+				mismaInscripcion = true;
+			}
 			if(inscripcionesEstudiante.get(i).getComision().getTurno().getIdTurno() == comision.getTurno().getIdTurno()) {
 				superponeTurno = true;
 			}
@@ -58,7 +58,14 @@ public class DetalleInscripcionABM {
 		}
 			
 		if( ((superponeDia == true) && (superponeTurno == true)) ) {
-			resultado = false;
+			if(mismaInscripcion) {
+				resultado = false;
+			}
+			else {
+				DetalleInscripcion detalleInscripcion = new DetalleInscripcion(inscripcion, comision, usuario, fechaInscripcion, false);
+				dao.agregarDetalleInscripcion(detalleInscripcion);
+				resultado = true;
+			}
 		}
 		else {
 			DetalleInscripcion detalleInscripcion = new DetalleInscripcion(inscripcion, comision, usuario, fechaInscripcion, false);
@@ -68,7 +75,7 @@ public class DetalleInscripcionABM {
 		
 		return resultado;
 		
-	} // end_public_agregar
+	}
 	
 	// METODO BAJA DETALLE INSCRIPCION
 	public boolean bajaDetalleInscripcionBaja(DetalleInscripcion objeto){

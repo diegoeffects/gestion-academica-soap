@@ -2,22 +2,24 @@ package respuestas;
 
 public class InscripcionWS {
 	
-	private int idInscripcion;
+	private String idInscripcion;
 	private String descripcion;
+	private String idInstancia;
 	private String instancia;
 	
-	public InscripcionWS(int idInscripcion, String descripcion, String instancia) {
+	public InscripcionWS(String idInscripcion, String descripcion, String idInstancia, String instancia) {
 		super();
 		this.idInscripcion = idInscripcion;
 		this.descripcion = descripcion;
+		this.idInstancia = idInstancia;
 		this.instancia = instancia;
 	}
 
-	public int getIdInscripcion() {
+	public String getIdInscripcion() {
 		return idInscripcion;
 	}
 
-	public void setIdInscripcion(int idInscripcion) {
+	public void setIdInscripcion(String idInscripcion) {
 		this.idInscripcion = idInscripcion;
 	}
 
@@ -27,6 +29,14 @@ public class InscripcionWS {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public String getIdInstancia() {
+		return idInstancia;
+	}
+
+	public void setIdInstancia(String idInstancia) {
+		this.idInstancia = idInstancia;
 	}
 
 	public String getInstancia() {

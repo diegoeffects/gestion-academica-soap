@@ -44,7 +44,6 @@ public class InscripcionABM {
 	        }
 			
 			if( (date.after(desde)) && (date.before(hasta)) ) {
-				System.out.println("Inscripcion vigente");
 				listaActivas.add(lista.get(i));
 			}
 
