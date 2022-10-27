@@ -14,7 +14,7 @@ public interface Estudiantes {
 	
 	// LISTADO DE INSCRIPCIONES ACTIVAS
 	@WebMethod
-	public InscripcionesWS traerInscripciones();
+	public InscripcionesWS traerInscripcionesActivas();
 	
 	// LISTADO DE INSCRIPCIONES POR ESTUDIANTE
 	@WebMethod

@@ -31,7 +31,7 @@ public class EstudiantesImpl implements Estudiantes{
 
 	// LISTADO DE INSCRIPCIONES ACTIVAS
 	@Override
-	public InscripcionesWS traerInscripciones() {
+	public InscripcionesWS traerInscripcionesActivas() {
 		
 		InscripcionABM inscripcionABM = new InscripcionABM();
 		
