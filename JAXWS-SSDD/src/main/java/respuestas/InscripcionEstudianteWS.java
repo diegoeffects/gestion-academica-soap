@@ -5,18 +5,18 @@ public class InscripcionEstudianteWS {
 	private String idDetalleEstudiante;
 	private String materia;
 	private String docente;
-	private String descripcion;
+	private String idInscripcion;
 	private String turno;
 	private String anio;
 	private String estado;
 	
-	public InscripcionEstudianteWS(String idDetalleEstudiante, String materia, String docente, String descripcion,
+	public InscripcionEstudianteWS(String idDetalleEstudiante, String materia, String docente, String idInscripcion,
 			String turno, String anio, String estado) {
 		super();
 		this.idDetalleEstudiante = idDetalleEstudiante;
 		this.materia = materia;
 		this.docente = docente;
-		this.descripcion = descripcion;
+		this.idInscripcion = idInscripcion;
 		this.turno = turno;
 		this.anio = anio;
 		this.estado = estado;
@@ -46,12 +46,12 @@ public class InscripcionEstudianteWS {
 		this.docente = docente;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getIdInscripcion() {
+		return idInscripcion;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setIdInscripcion(String idInscripcion) {
+		this.idInscripcion = idInscripcion;
 	}
 
 	public String getTurno() {
