@@ -109,7 +109,7 @@ public class EstudiantesImpl implements Estudiantes{
 							inscripcionesEstudiante.get(i).getComision().getMateria().getMateria(),
 							inscripcionesEstudiante.get(i).getComision().getUsuario().getApellido() +
 							", " + inscripcionesEstudiante.get(i).getComision().getUsuario().getNombre(),
-							inscripcionesEstudiante.get(i).getInscripcion().getDescripcion(),
+							String.valueOf(inscripcionesEstudiante.get(i).getInscripcion().getIdInscripcion()),
 							inscripcionesEstudiante.get(i).getComision().getTurno().getTurno(),
 							inscripcionesEstudiante.get(i).getComision().getAnio(),
 							estado
@@ -163,7 +163,6 @@ public class EstudiantesImpl implements Estudiantes{
 							materias.get(i).getMateria().getMateria(),
 							materias.get(i).getUsuario().getApellido() +
 							", " + materias.get(i).getUsuario().getNombre(),
-							materias.get(i).getInscripcion().getDescripcion(),
 							materias.get(i).getTurno().getTurno()
 					);
 						
@@ -189,13 +188,28 @@ public class EstudiantesImpl implements Estudiantes{
 		ComisionABM comisionABM = new ComisionABM();
 
 		Usuario usuario = usuarioABM.traerEstudiante(idUsuario);
-		Inscripcion inscripcion = inscripcionABM.traerInscripcion(idInscripcion);
+		Inscripcion inscripcion = null;
 		Comision comision = comisionABM.traerComision(idComision);
+		
+		List<Inscripcion> inscripcionesVigentes = inscripcionABM.traerInscripcionesActivas();
 		
 		RespuestaWS respuestaWS = new RespuestaWS(
 				"Algunos de los parametros no son correctos",
 				"EMPTY"
 		);
+		
+		for (int i = 0; i < inscripcionesVigentes.size(); i++) {
+			
+			if (idInscripcion == inscripcionesVigentes.get(i).getIdInscripcion()) {
+				
+				if(comision.getInscripcion().getIdInscripcion() == inscripcionesVigentes.get(i).getIdInscripcion()) {
+					
+					inscripcion = inscripcionABM.traerInscripcion(idInscripcion);
+					
+				}
+			}
+			
+		}
 		
 		if( (usuario != null) && (inscripcion != null) && (comision != null) ) {
 			
