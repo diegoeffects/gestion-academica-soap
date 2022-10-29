@@ -27,7 +27,7 @@ public class UsuarioABM {
 	}
 	
 	// METODO MODIFICAR USUARIO
-	public Usuario actualizarDatosUsuario(int idUsuario, String correo, String celular) throws Exception {
+	public Usuario actualizarDatosUsuario(int idUsuario, String correo, String celular, String clave) throws Exception {
 		
 		Usuario objeto = dao.traerUsuario(idUsuario);
 		
@@ -37,6 +37,7 @@ public class UsuarioABM {
 		
 		objeto.setCorreo(correo);
 		objeto.setCelular(celular);
+		objeto.setCelular(clave);
 		
 		if(dao.actualizarDatosUsuario(objeto)){
 			objeto = dao.traerUsuario(idUsuario);

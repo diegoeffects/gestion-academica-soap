@@ -2,32 +2,36 @@ package respuestas;
 
 public class InscripcionEstudianteWS {
 	
-	private String idDetalleEstudiante;
+	private String idDetalleInscripcion;
 	private String materia;
 	private String docente;
 	private String idInscripcion;
 	private String turno;
+	private String idDia;
+	private String diaHorario;
 	private String anio;
 	private String estado;
 	
-	public InscripcionEstudianteWS(String idDetalleEstudiante, String materia, String docente, String idInscripcion,
-			String turno, String anio, String estado) {
+	public InscripcionEstudianteWS(String idDetalleInscripcion, String materia, String docente, String idInscripcion,
+			String turno, String idDia, String diaHorario, String anio, String estado) {
 		super();
-		this.idDetalleEstudiante = idDetalleEstudiante;
+		this.idDetalleInscripcion = idDetalleInscripcion;
 		this.materia = materia;
 		this.docente = docente;
 		this.idInscripcion = idInscripcion;
 		this.turno = turno;
+		this.idDia = idDia;
+		this.diaHorario = diaHorario;
 		this.anio = anio;
 		this.estado = estado;
 	}
-
-	public String getIdDetalleEstudiante() {
-		return idDetalleEstudiante;
+	
+	public String getIdDetalleInscripcion() {
+		return idDetalleInscripcion;
 	}
 
-	public void setIdDetalleEstudiante(String idDetalleEstudiante) {
-		this.idDetalleEstudiante = idDetalleEstudiante;
+	public void setIdDetalleInscripcion(String idDetalleInscripcion) {
+		this.idDetalleInscripcion = idDetalleInscripcion;
 	}
 
 	public String getMateria() {
@@ -60,6 +64,22 @@ public class InscripcionEstudianteWS {
 
 	public void setTurno(String turno) {
 		this.turno = turno;
+	}
+
+	public String getIdDia() {
+		return idDia;
+	}
+
+	public void setIdDia(String idDia) {
+		this.idDia = idDia;
+	}
+
+	public String getDiaHorario() {
+		return diaHorario;
+	}
+
+	public void setDiaHorario(String diaHorario) {
+		this.diaHorario = diaHorario;
 	}
 
 	public String getAnio() {

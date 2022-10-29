@@ -111,6 +111,8 @@ public class EstudiantesImpl implements Estudiantes{
 							", " + inscripcionesEstudiante.get(i).getComision().getUsuario().getNombre(),
 							String.valueOf(inscripcionesEstudiante.get(i).getInscripcion().getIdInscripcion()),
 							inscripcionesEstudiante.get(i).getComision().getTurno().getTurno(),
+							String.valueOf(inscripcionesEstudiante.get(i).getComision().getDia().getIdDia()),
+							inscripcionesEstudiante.get(i).getComision().getDia().getDia() + " " + inscripcionesEstudiante.get(i).getComision().getRangoHorario(),
 							inscripcionesEstudiante.get(i).getComision().getAnio(),
 							estado
 					);
@@ -163,7 +165,9 @@ public class EstudiantesImpl implements Estudiantes{
 							materias.get(i).getMateria().getMateria(),
 							materias.get(i).getUsuario().getApellido() +
 							", " + materias.get(i).getUsuario().getNombre(),
-							materias.get(i).getTurno().getTurno()
+							materias.get(i).getTurno().getTurno(),
+							String.valueOf(materias.get(i).getDia().getIdDia()),
+							materias.get(i).getDia().getDia() + " " + materias.get(i).getRangoHorario()
 					);
 						
 					materiasList.add(materiaInscripcionCarrera);
@@ -283,7 +287,7 @@ public class EstudiantesImpl implements Estudiantes{
 	
 	// ACTUALIZACION DATOS DE ESTUDIANTE
 	@Override
-	public RespuestaWS actualizarDatosUsuario(int idUsuario, String correo, String celular) {
+	public RespuestaWS actualizarDatosUsuario(int idUsuario, String correo, String celular, String clave) {
 	
 		UsuarioABM usuarioABM = new UsuarioABM();
 		Usuario usuario = usuarioABM.traerEstudiante(idUsuario);
@@ -298,13 +302,13 @@ public class EstudiantesImpl implements Estudiantes{
 			respuestaWS.setError("Falta especificar algunos de los parametros");
 			respuestaWS.setEstado("EMPTY");
 			
-			if( (correo != "") && (celular != "") ){
+			if( (correo != "") && (celular != "") && (clave != "") ){
 				
 				respuestaWS.setError("");
 				respuestaWS.setEstado("SUCCESS");
 				
 				try {
-					usuario =  usuarioABM.actualizarDatosUsuario(idUsuario, correo, celular);
+					usuario =  usuarioABM.actualizarDatosUsuario(idUsuario, correo, celular, clave);
 				}
 				catch(Exception e) {
 					e.getMessage();

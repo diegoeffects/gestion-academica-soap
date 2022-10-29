@@ -36,7 +36,7 @@ public interface Estudiantes {
 	// ACTUALIZACION DATOS DE ESTUDIANTE
 	@WebMethod
 	public RespuestaWS actualizarDatosUsuario(@WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "correo") String correo,
-			@WebParam(name = "celular") String celular);
+			@WebParam(name = "celular") String celular, @WebParam(name = "clave") String clave);
 	
 	// ACTUALIZACION DATOS DE ESTUDIANTE POR ADMINISTADOR
 	@WebMethod

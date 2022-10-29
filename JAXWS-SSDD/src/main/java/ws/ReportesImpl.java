@@ -196,7 +196,7 @@ public class ReportesImpl implements Reportes{
 		
 	}
 	
-	// REPORTE LISTADO DE MATERIAS
+	// REPORTE LISTADO DE MATERIAS POR INSCRIPCION, CARRERA Y TURNO
 	@Override
 	public respuestas.MateriasInscripcionWS traerMateriasPorInscripcionYCarreraYTurno(int idInscripcion, int idCarrera, int idTurno){
 

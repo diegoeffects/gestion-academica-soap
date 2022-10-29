@@ -11,11 +11,11 @@ public interface Reportes {
 	@WebMethod
 	public respuestas.MateriasAprobadasWS traerMateriasAprobadasPorEstudiante(@WebParam(name = "idUsuario") int idUsuario);
 	
-	// REPORTE LISTADO DE ALUMNOS INSCRIPTOS
+	// REPORTE LISTADO DE ESTUDIANTES INSCRIPTOS
 	@WebMethod
 	public respuestas.EstudiantesMateriaWS traerEstudiantesInscriptosPorMateria(@WebParam(name = "idComision") int idComision);
 	
-	// REPORTE LISTADO DE MATERIAS
+	// REPORTE LISTADO DE MATERIAS POR INSCRIPCION, CARRERA Y TURNO
 	@WebMethod
 	public respuestas.MateriasInscripcionWS traerMateriasPorInscripcionYCarreraYTurno(@WebParam(name = "idInscripcion") int idInscripcion, @WebParam(name = "idCarrera") int idCarrera,
 			@WebParam(name = "idTurno") int idTurno);
