@@ -75,6 +75,24 @@ public class NotaComisionDao {
 		return lista;
 	}
 	
+	// METODO TRAER NOTAS COMISION POR USUARIO
+	@SuppressWarnings("unchecked")
+	public List<NotaComision> traerNotasComisionCursadaPorUsuario(int idUsuario) throws HibernateException{
+		List<NotaComision> lista = null;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from NotaComision nc where nc.usuario = " + idUsuario + " and nc.tipoNota = 10").list();
+		}
+		catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		}
+		finally {
+			session.close();
+		}
+		return lista;
+	}
+	
 	// METODO TRAER NOTAS COMISION DEFINITIVAS POR USUARIO
 	@SuppressWarnings("unchecked")
 	public List<NotaComision> traerNotasComisionDefinitivasPorUsuario(int idUsuario) throws HibernateException{

@@ -8,6 +8,8 @@ import datos.Carrera;
 import datos.Comision;
 import datos.DetalleInscripcion;
 import datos.Inscripcion;
+import datos.Instancia;
+import datos.Materia;
 import datos.NotaComision;
 import datos.Turno;
 import datos.Usuario;
@@ -15,9 +17,13 @@ import negocio.CarreraABM;
 import negocio.ComisionABM;
 import negocio.DetalleInscripcionABM;
 import negocio.InscripcionABM;
+import negocio.InstanciaABM;
+import negocio.MateriaABM;
 import negocio.NotaComisionABM;
 import negocio.TurnoABM;
 import negocio.UsuarioABM;
+import respuestas.ComisionMateriaWS;
+import respuestas.ComisionesMateriaWS;
 import respuestas.EstudianteMateriaWS;
 import respuestas.MateriaAprobadaWS;
 import respuestas.MateriaInscripcionWS;
@@ -255,6 +261,52 @@ public class ReportesImpl implements Reportes{
 		
 		return materiasInscripcionWS;
 		
+	}
+	
+	
+	// REPORTE LISTADO DE MATERIAS POR INSTANCIA Y MATERIA
+	@Override
+	public ComisionesMateriaWS traerComisionesPorInstanciaYMateria(int idInstancia, int idMateria){
+		
+		InstanciaABM instanciaABM = new InstanciaABM();
+		MateriaABM materiaABM = new MateriaABM();
+		
+		Instancia instancia = instanciaABM.traerInstancia(idInstancia);
+		Materia materia = materiaABM.traerMateria(idMateria);
+		
+		ComisionesMateriaWS comisionesMateriaWS = new ComisionesMateriaWS(
+				"La materia no existe o no posee comisiones asociadas",
+				"EMPTY"
+		);
+		
+		if ( (materia != null) && (instancia != null) ) {
+			
+			comisionesMateriaWS.setError("");
+			comisionesMateriaWS.setEstado("SUCCESS");
+		
+			ComisionABM comisionABM = new ComisionABM();
+		
+			List<Comision> comisiones = comisionABM.traerComisionesPorInstanciaYMateria(idInstancia, idMateria);
+			List<ComisionMateriaWS> comisionesMateriaList = new ArrayList<ComisionMateriaWS>();
+			
+			
+			for (int i = 0; i < comisiones.size(); i++) {
+				
+				ComisionMateriaWS comisionMateriaWS = new ComisionMateriaWS(
+						String.valueOf(comisiones.get(i).getIdComision()),
+						String.valueOf(comisiones.get(i).getMateria().getIdMateria()) + "-" + String.valueOf(comisiones.get(i).getComision())
+				);
+					
+				comisionesMateriaList.add(comisionMateriaWS);
+				
+			}
+			
+			comisionesMateriaWS.setComisiones(comisionesMateriaList);
+		
+		}
+		
+		return comisionesMateriaWS;
+	
 	}
 
 }

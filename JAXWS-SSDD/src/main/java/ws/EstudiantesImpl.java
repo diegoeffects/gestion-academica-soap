@@ -12,8 +12,10 @@ import datos.Carrera;
 import datos.Comision;
 import datos.DetalleInscripcion;
 import datos.Inscripcion;
+import datos.NotaComision;
 import datos.Usuario;
 import negocio.InscripcionABM;
+import negocio.NotaComisionABM;
 import negocio.CarreraABM;
 import negocio.ComisionABM;
 import negocio.DetalleInscripcionABM;
@@ -218,18 +220,48 @@ public class EstudiantesImpl implements Estudiantes{
 		if( (usuario != null) && (inscripcion != null) && (comision != null) ) {
 			
 			boolean agregado = false;
+			boolean realizarInscripcion = false;
 			
 			DetalleInscripcionABM detalleInscripcionABM = new DetalleInscripcionABM();
 			
 			Date date = new Date(); 
 		    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
 		    String fechaActual = dateFormat.format(date);
-			
-			try {
-				agregado = detalleInscripcionABM.agregarDetalleInscripcion(inscripcion, comision, usuario, fechaActual, false);
-			}
-			catch(Exception e) {
-				e.getMessage();
+		    
+		    if (comision.getInscripcion().getInstancia().getIdInstancia() == 1) {
+		    	realizarInscripcion = true;
+		    }
+		    else if (comision.getInscripcion().getInstancia().getIdInstancia() == 2) {
+		    	
+		    	int idMateria = comision.getMateria().getIdMateria();
+		    	
+		    	NotaComisionABM notaComisionABM = new NotaComisionABM();
+		    	
+		    	List<NotaComision> notas = notaComisionABM.traerNotasComisionCursadaPorUsuario(usuario.getIdUsuario());
+		    	
+				for (int i = 0; i < notas.size(); i++) {
+					
+					if (idMateria == notas.get(i).getComision().getMateria().getIdMateria()) {
+						
+						if( (notas.get(i).getNota() >= 4) ) {
+							
+							realizarInscripcion = true;
+							
+						}
+						
+					}
+					
+				}
+				
+		    }
+		    
+			if (realizarInscripcion) {
+				try {
+					agregado = detalleInscripcionABM.agregarDetalleInscripcion(inscripcion, comision, usuario, fechaActual, false);
+				}
+				catch(Exception e) {
+					e.getMessage();
+				}
 			}
 			
 			if(agregado) {
@@ -237,7 +269,7 @@ public class EstudiantesImpl implements Estudiantes{
 				respuestaWS.setEstado("SUCCESS");
 			}
 			else {
-				respuestaWS.setError("No se realizo el alta del estudiante");
+				respuestaWS.setError("No se realizo el alta de inscripcion del estudiante");
 				respuestaWS.setEstado("FAIL");
 			}
 			

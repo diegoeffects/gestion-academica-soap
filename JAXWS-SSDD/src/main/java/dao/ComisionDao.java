@@ -57,13 +57,31 @@ public class ComisionDao {
 		return lista;
 	}
 	
+	// METODO TRAER COMISIONES POR INSTANCIA Y MATERIA
+	@SuppressWarnings("unchecked")
+	public List<Comision> traerComisionesPorInstanciaYMateria(int idInstancia, int idMateria) throws HibernateException{
+		List<Comision> lista = null;
+		try {
+			iniciaOperacion();
+			lista = session.createQuery("from Comision c where c.materia=" + idMateria + " and c.inscripcion in (from Inscripcion i where i.instancia=" + idInstancia + ")").list();
+		}
+		catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		}
+		finally {
+			session.close();
+		}
+		return lista;
+	}
+	
 	// METODO TRAER COMISIONES POR INSCRIPCION Y CARRERA
 	@SuppressWarnings("unchecked")
 	public List<Comision> traerComisionesPorInscripcionYCarrera(int idInscripcion, int idCarrera){
 		List<Comision> lista = null;
 		try {
 			iniciaOperacion();
-			lista = session.createQuery("from Comision c where c.inscripcion=" + idInscripcion + "and c.materia in (from Materia m where m.carrera=" + idCarrera + ")").list();
+			lista = session.createQuery("from Comision c where c.inscripcion=" + idInscripcion + " and c.materia in (from Materia m where m.carrera=" + idCarrera + ")").list();
 		}
 		catch (HibernateException he) {
 			manejaExcepcion(he);

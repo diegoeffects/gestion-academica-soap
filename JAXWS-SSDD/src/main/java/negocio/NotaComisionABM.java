@@ -24,6 +24,11 @@ public class NotaComisionABM {
 		return dao.traerNotasComisionPorComisionYUsuario(idComision, idUsuario);
 	}
 	
+	// METODO TRAER NOTAS COMISION POR USUARIO
+	public List<NotaComision> traerNotasComisionCursadaPorUsuario(int idUsuario) {
+		return dao.traerNotasComisionCursadaPorUsuario(idUsuario);
+	}
+	
 	// METODO TRAER NOTAS COMISION DEFINITIVAS POR USUARIO
 	public List<NotaComision> traerNotasComisionDefinitivasPorUsuario(int idUsuario) {
 		return dao.traerNotasComisionDefinitivasPorUsuario(idUsuario);

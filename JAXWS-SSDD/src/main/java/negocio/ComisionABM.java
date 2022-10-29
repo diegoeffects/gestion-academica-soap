@@ -19,6 +19,11 @@ public class ComisionABM {
 		return dao.traerComisiones();
 	}
 	
+	// METODO TRAER COMISIONES POR MATERIA
+	public List<Comision> traerComisionesPorInstanciaYMateria(int idInstancia, int idMateria) {
+		return dao.traerComisionesPorInstanciaYMateria(idInstancia, idMateria);
+	}
+	
 	// METODO TRAER COMISIONES POR INSCRIPCION Y CARRERA
 	public List<Comision> traerComisionesPorInscripcionYCarrera(int idInscripcion, int idCarrera) {
 		return dao.traerComisionesPorInscripcionYCarrera(idInscripcion, idCarrera);
