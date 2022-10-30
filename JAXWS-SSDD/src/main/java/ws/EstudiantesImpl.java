@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.jws.HandlerChain;
 import javax.jws.WebService;
+import javax.xml.ws.ServiceMode;
 
 import datos.Carrera;
 import datos.Comision;
@@ -28,6 +30,8 @@ import respuestas.InscripcionWS;
 import respuestas.InscripcionesEstudianteWS;
 import respuestas.InscripcionesWS;
 
+@ServiceMode(value = javax.xml.ws.Service.Mode.MESSAGE)
+@HandlerChain(file="handler.xml")
 @WebService(endpointInterface="ws.Estudiantes")
 public class EstudiantesImpl implements Estudiantes{
 
@@ -43,7 +47,7 @@ public class EstudiantesImpl implements Estudiantes{
 				"No existen inscripciones activas",
 				"EMPTY"			
 		);
-			
+		
 		if(inscripciones.size() != 0) {
 			
 			inscripcionesWS.setError("");

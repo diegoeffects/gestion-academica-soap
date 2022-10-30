@@ -9,10 +9,7 @@ public class InstanciaABM {
 	
 	// METODO TRAER INSTANCIA
 	public Instancia traerInstancia(int idInstancia) {
-		
-		Instancia objeto = dao.traerInstancia(idInstancia);
-		return objeto;
-		
+		return dao.traerInstancia(idInstancia);	
 	}
 
 }

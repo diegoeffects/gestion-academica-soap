@@ -9,10 +9,7 @@ public class MateriaABM {
 	
 	// METODO TRAER MATERIA
 	public Materia traerMateria(int idMateria) {
-		
-		Materia objeto = dao.traerMateria(idMateria);
-		return objeto;
-		
+		return dao.traerMateria(idMateria);
 	}
 
 }

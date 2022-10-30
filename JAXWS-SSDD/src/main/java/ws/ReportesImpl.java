@@ -3,6 +3,7 @@ package ws;
 import java.util.ArrayList;
 import java.util.List;
 import javax.jws.*;
+import javax.xml.ws.ServiceMode;
 
 import datos.Carrera;
 import datos.Comision;
@@ -31,6 +32,8 @@ import respuestas.MateriasAprobadasWS;
 import respuestas.EstudiantesMateriaWS;
 import respuestas.MateriasInscripcionWS;
 
+@ServiceMode(value = javax.xml.ws.Service.Mode.MESSAGE)
+@HandlerChain(file="handler.xml")
 @WebService(endpointInterface="ws.Reportes")
 public class ReportesImpl implements Reportes{
 	
@@ -67,7 +70,8 @@ public class ReportesImpl implements Reportes{
 						"(" + historialAcademicoList.get(i).getComision().getMateria().getIdMateria() +
 						") " + historialAcademicoList.get(i).getComision().getMateria().getMateria(),
 						historialAcademicoList.get(i).getComision().getUsuario().getApellido() + ", " + historialAcademicoList.get(i).getComision().getUsuario().getNombre(),
-						historialAcademicoList.get(i).getNota(), historialAcademicoList.get(i).getFecha()
+						historialAcademicoList.get(i).getNota(),
+						historialAcademicoList.get(i).getFecha()
 				);
 				
 				materiasAprobadasList.add(materiaAprobada);
@@ -99,7 +103,7 @@ public class ReportesImpl implements Reportes{
 		if(comision != null) {
 			
 			DetalleInscripcionABM detalleinscripcionABM = new DetalleInscripcionABM();
-			List<DetalleInscripcion> estudiantes = detalleinscripcionABM.traerDetallesInscripcionPorComision(idComision);
+			List<DetalleInscripcion> estudiantes = detalleinscripcionABM.traerDetallesInscripcionActivasPorComision(idComision);
 			
 			if(estudiantes.size() != 0) {
 				

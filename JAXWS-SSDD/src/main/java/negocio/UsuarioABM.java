@@ -11,14 +11,12 @@ public class UsuarioABM {
 	
 	// METODO TRAER USUARIO
 	public Usuario traerUsuario(int idUsuario) {
-		Usuario objeto = dao.traerUsuario(idUsuario);
-		return objeto;
+		return dao.traerUsuario(idUsuario);
 	}
 	
 	// METODO TRAER ESTUDIANTE
 	public Usuario traerEstudiante(int idUsuario) {
-		Usuario objeto = dao.traerEstudiante(idUsuario);
-		return objeto;
+		return dao.traerEstudiante(idUsuario);
 	}
 	
 	// METODO TRAER USUARIOS
@@ -37,7 +35,7 @@ public class UsuarioABM {
 		
 		objeto.setCorreo(correo);
 		objeto.setCelular(celular);
-		objeto.setCelular(clave);
+		objeto.setClave(clave);
 		
 		if(dao.actualizarDatosUsuario(objeto)){
 			objeto = dao.traerUsuario(idUsuario);

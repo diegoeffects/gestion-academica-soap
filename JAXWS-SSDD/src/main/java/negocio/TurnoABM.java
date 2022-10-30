@@ -9,10 +9,7 @@ public class TurnoABM {
 	
 	// METODO TRAER TURNO
 	public Turno traerTurno(int idTurno) {
-		
-		Turno objeto = dao.traerTurno(idTurno);
-		return objeto;
-		
+		return dao.traerTurno(idTurno);
 	}
 
 }

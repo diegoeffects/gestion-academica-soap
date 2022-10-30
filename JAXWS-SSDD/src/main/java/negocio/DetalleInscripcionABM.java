@@ -18,19 +18,14 @@ public class DetalleInscripcionABM {
 		return objeto;
 	}
 	
-	// METODO TRAER INSCRIPCIONES
-	public List<DetalleInscripcion> traerDetallesInscripcion() {
-		return dao.traerDetallesInscripcion();
-	}
-	
 	// METODO TRAER DETALLES INSCRIPCION POR ESTUDIANTE
 	public List<DetalleInscripcion> traerDetallesInscripcionPorEstudiante(int idUsuario){
 		return dao.traerDetallesInscripcionPorEstudiante(idUsuario);
 	}
 	
-	// METODO TRAER DETALLES INSCRIPCION POR COMISION
-	public List<DetalleInscripcion> traerDetallesInscripcionPorComision(int idComision){
-		return dao.traerDetallesInscripcionPorComision(idComision);
+	// METODO TRAER DETALLES INSCRIPCION ACTIVAS POR COMISION
+	public List<DetalleInscripcion> traerDetallesInscripcionActivasPorComision(int idComision){
+		return dao.traerDetallesInscripcionActivasPorComision(idComision);
 	}
 	
 	// METODO AGREGAR DETALLE INSCRIPCION

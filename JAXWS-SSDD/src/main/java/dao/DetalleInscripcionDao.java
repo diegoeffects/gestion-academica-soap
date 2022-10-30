@@ -39,24 +39,6 @@ public class DetalleInscripcionDao {
 		return objeto;
 	}
 	
-	// METODO TRAER DETALLES INSCRIPCION
-	@SuppressWarnings("unchecked")
-	public List<DetalleInscripcion> traerDetallesInscripcion() throws HibernateException{
-		List<DetalleInscripcion> lista = null;
-		try {
-			iniciaOperacion();
-			lista = session.createQuery("from DetalleInscripcion").list();
-		}
-		catch (HibernateException he) {
-			manejaExcepcion(he);
-			throw he;
-		}
-		finally {
-			session.close();
-		}
-		return lista;
-	}
-	
 	// METODO TRAER DETALLES INSCRIPCION POR ESTUDIANTE
 	@SuppressWarnings("unchecked")
 	public List<DetalleInscripcion> traerDetallesInscripcionPorEstudiante(int idUsuario) throws HibernateException{
@@ -94,9 +76,9 @@ public class DetalleInscripcionDao {
 	}
 	
 	
-	// METODO TRAER DETALLES INSCRIPCION POR COMISION
+	// METODO TRAER DETALLES INSCRIPCION ACTIVAS POR COMISION
 	@SuppressWarnings("unchecked")
-	public List<DetalleInscripcion> traerDetallesInscripcionPorComision(int idComision) throws HibernateException{
+	public List<DetalleInscripcion> traerDetallesInscripcionActivasPorComision(int idComision) throws HibernateException{
 		List<DetalleInscripcion> lista = null;
 		try {
 			iniciaOperacion();
