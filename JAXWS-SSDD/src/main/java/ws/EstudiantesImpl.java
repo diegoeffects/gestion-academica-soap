@@ -16,19 +16,19 @@ import datos.DetalleInscripcion;
 import datos.Inscripcion;
 import datos.NotaComision;
 import datos.Usuario;
+import dto.InscripcionEstudianteDTO;
+import dto.InscripcionDTO;
+import dto.InscripcionesEstudianteDTO;
+import dto.InscripcionesDTO;
+import dto.MateriaInscripcionCarreraDTO;
+import dto.MateriasInscripcionCarreraDTO;
+import dto.RespuestaDTO;
 import negocio.InscripcionABM;
 import negocio.NotaComisionABM;
 import negocio.CarreraABM;
 import negocio.ComisionABM;
 import negocio.DetalleInscripcionABM;
 import negocio.UsuarioABM;
-import respuestas.MateriaInscripcionCarreraWS;
-import respuestas.MateriasInscripcionCarreraWS;
-import respuestas.RespuestaWS;
-import respuestas.InscripcionEstudianteWS;
-import respuestas.InscripcionWS;
-import respuestas.InscripcionesEstudianteWS;
-import respuestas.InscripcionesWS;
 
 @ServiceMode(value = javax.xml.ws.Service.Mode.MESSAGE)
 @HandlerChain(file="handler.xml")
@@ -37,70 +37,70 @@ public class EstudiantesImpl implements Estudiantes{
 
 	// LISTADO DE INSCRIPCIONES ACTIVAS
 	@Override
-	public InscripcionesWS traerInscripcionesActivas() {
+	public InscripcionesDTO traerInscripcionesActivas() {
 		
 		InscripcionABM inscripcionABM = new InscripcionABM();
 		
-		List<Inscripcion> inscripciones =  inscripcionABM.traerInscripcionesActivas();
+		List<Inscripcion> inscripcionesActivas =  inscripcionABM.traerInscripcionesActivas();
 		
-		InscripcionesWS inscripcionesWS = new InscripcionesWS(
+		InscripcionesDTO inscripciones = new InscripcionesDTO(
 				"No existen inscripciones activas",
 				"EMPTY"			
 		);
 		
-		if(inscripciones.size() != 0) {
+		if(inscripcionesActivas.size() != 0) {
 			
-			inscripcionesWS.setError("");
-			inscripcionesWS.setEstado("SUCCESS");
+			inscripciones.setError("");
+			inscripciones.setEstado("SUCCESS");
 			
-			List<InscripcionWS> inscripcionesList = new ArrayList<InscripcionWS>();
+			List<InscripcionDTO> inscripcionesList = new ArrayList<InscripcionDTO>();
 			
-			for (int i = 0; i < inscripciones.size(); i++) {
+			for (int i = 0; i < inscripcionesActivas.size(); i++) {
 				
-				InscripcionWS inscripcion = new InscripcionWS(
-						String.valueOf(inscripciones.get(i).getIdInscripcion()),
-						inscripciones.get(i).getDescripcion(),
-						String.valueOf(inscripciones.get(i).getInstancia().getIdInstancia()),
-						inscripciones.get(i).getInstancia().getInstancia()
+				InscripcionDTO inscripcion = new InscripcionDTO(
+						String.valueOf(inscripcionesActivas.get(i).getIdInscripcion()),
+						inscripcionesActivas.get(i).getDescripcion(),
+						String.valueOf(inscripcionesActivas.get(i).getInstancia().getIdInstancia()),
+						inscripcionesActivas.get(i).getInstancia().getInstancia()
 				);		
 				inscripcionesList.add(inscripcion);
 				
 			}
 			
-			inscripcionesWS.setInscripciones(inscripcionesList);
+			inscripciones.setInscripciones(inscripcionesList);
 		
 		}
 
-		return inscripcionesWS;
+		return inscripciones;
 		
 	}
 
 	// LISTADO DE INSCRIPCIONES POR ESTUDIANTE
 	@Override
-	public InscripcionesEstudianteWS traerInscripcionesPorEstudiante(int idUsuario) {
+	public InscripcionesEstudianteDTO traerInscripcionesPorEstudiante(int idUsuario) {
 		
 		UsuarioABM usuarioABM = new UsuarioABM();
 		Usuario usuario = usuarioABM.traerEstudiante(idUsuario);
 		
-		InscripcionesEstudianteWS inscripcionesEstudianteWS = new InscripcionesEstudianteWS(
+		InscripcionesEstudianteDTO inscripcionesEstudianteDTO = new InscripcionesEstudianteDTO(
 				"El usuario no existe o no corresponde a un estudiante",
 				"EMPTY"
 		);
 		
 		if(usuario != null) {
 			
-			inscripcionesEstudianteWS.setError("El estudiante no posee inscripciones asociadas");
-			inscripcionesEstudianteWS.setEstado("EMPTY");
+			inscripcionesEstudianteDTO.setError("El estudiante no posee inscripciones asociadas");
+			inscripcionesEstudianteDTO.setEstado("EMPTY");
 			
 			DetalleInscripcionABM detalleinscripcionABM = new DetalleInscripcionABM();
 			List<DetalleInscripcion> inscripcionesEstudiante =  detalleinscripcionABM.traerDetallesInscripcionPorEstudiante(idUsuario);
 			
 			if(inscripcionesEstudiante.size() != 0) {
 				
-				inscripcionesEstudianteWS.setError("");
-				inscripcionesEstudianteWS.setEstado("SUCCESS");
+				inscripcionesEstudianteDTO.setError("");
+				inscripcionesEstudianteDTO.setEstado("SUCCESS");
 				
-				List<InscripcionEstudianteWS> inscripcionesEstudianteList = new ArrayList<InscripcionEstudianteWS>();
+				List<InscripcionEstudianteDTO> inscripcionesEstudianteList = new ArrayList<InscripcionEstudianteDTO>();
 				
 				for (int i = 0; i < inscripcionesEstudiante.size(); i++) {
 					
@@ -110,7 +110,7 @@ public class EstudiantesImpl implements Estudiantes{
 						estado = "No activo";
 					}
 					
-					InscripcionEstudianteWS inscripcionEstudiante = new InscripcionEstudianteWS(
+					InscripcionEstudianteDTO inscripcionEstudiante = new InscripcionEstudianteDTO(
 							String.valueOf(inscripcionesEstudiante.get(i).getIdDetalleInscripcion()),
 							inscripcionesEstudiante.get(i).getComision().getMateria().getMateria(),
 							inscripcionesEstudiante.get(i).getComision().getUsuario().getApellido() +
@@ -127,18 +127,18 @@ public class EstudiantesImpl implements Estudiantes{
 					
 				}
 				
-				inscripcionesEstudianteWS.setInscripcionesEstudiante(inscripcionesEstudianteList);
+				inscripcionesEstudianteDTO.setInscripcionesEstudiante(inscripcionesEstudianteList);
 				
 			}
 			
 		}
 			
-		return inscripcionesEstudianteWS;
+		return inscripcionesEstudianteDTO;
 	}
 
 	// LISTADO DE MATERIAS POR INSCRIPCION Y CARRERA
 	@Override
-	public MateriasInscripcionCarreraWS traerMateriasPorInscripcionPorCarrera(int idInscripcion, int idCarrera) {
+	public MateriasInscripcionCarreraDTO traerMateriasPorInscripcionPorCarrera(int idInscripcion, int idCarrera) {
 		
 		InscripcionABM inscripcionABM = new InscripcionABM();
 		CarreraABM carreraABM = new CarreraABM();
@@ -146,7 +146,7 @@ public class EstudiantesImpl implements Estudiantes{
 		Inscripcion inscripcion = inscripcionABM.traerInscripcion(idInscripcion);
 		Carrera carrera = carreraABM.traerCarrera(idCarrera);
 	
-		MateriasInscripcionCarreraWS materiasInscripcionCarreraWS = new MateriasInscripcionCarreraWS(
+		MateriasInscripcionCarreraDTO materiasInscripcionCarreraDTO = new MateriasInscripcionCarreraDTO(
 				"No existen materias asociadas para los parametros especificados",
 				"EMPTY"
 		);
@@ -159,14 +159,14 @@ public class EstudiantesImpl implements Estudiantes{
 			
 			if(materias.size() != 0) {
 				
-				materiasInscripcionCarreraWS.setError("");
-				materiasInscripcionCarreraWS.setEstado("SUCCESS");
+				materiasInscripcionCarreraDTO.setError("");
+				materiasInscripcionCarreraDTO.setEstado("SUCCESS");
 			
-				List<MateriaInscripcionCarreraWS> materiasList = new ArrayList<MateriaInscripcionCarreraWS>();
+				List<MateriaInscripcionCarreraDTO> materiasList = new ArrayList<MateriaInscripcionCarreraDTO>();
 				
 				for (int i = 0; i < materias.size(); i++) {
 					
-					MateriaInscripcionCarreraWS materiaInscripcionCarrera = new MateriaInscripcionCarreraWS(
+					MateriaInscripcionCarreraDTO materiaInscripcionCarrera = new MateriaInscripcionCarreraDTO(
 							String.valueOf(materias.get(i).getIdComision()),
 							materias.get(i).getMateria().getMateria(),
 							materias.get(i).getUsuario().getApellido() +
@@ -180,18 +180,18 @@ public class EstudiantesImpl implements Estudiantes{
 					
 				}
 				
-				materiasInscripcionCarreraWS.setMateriasIncripcionCarrera(materiasList);
+				materiasInscripcionCarreraDTO.setMateriasIncripcionCarrera(materiasList);
 				
 			}
 			
 		}
 		
-		return materiasInscripcionCarreraWS;
+		return materiasInscripcionCarreraDTO;
 	}
 
 	// ALTA DE UN ESTUDIANTE EN UNA MATERIA DE UNA INSCRIPCION
 	@Override
-	public RespuestaWS altaInscripcionEstudiante(int idUsuario, int idInscripcion, int idComision) {
+	public RespuestaDTO altaInscripcionEstudiante(int idUsuario, int idInscripcion, int idComision) {
 		
 		UsuarioABM usuarioABM = new UsuarioABM();
 		InscripcionABM inscripcionABM = new InscripcionABM();
@@ -203,7 +203,7 @@ public class EstudiantesImpl implements Estudiantes{
 		
 		List<Inscripcion> inscripcionesVigentes = inscripcionABM.traerInscripcionesActivas();
 		
-		RespuestaWS respuestaWS = new RespuestaWS(
+		RespuestaDTO respuesta = new RespuestaDTO(
 				"Algunos de los parametros no son correctos",
 				"EMPTY"
 		);
@@ -273,33 +273,33 @@ public class EstudiantesImpl implements Estudiantes{
 			}
 			
 			if(agregado) {
-				respuestaWS.setError("");
-				respuestaWS.setEstado("SUCCESS");
+				respuesta.setError("");
+				respuesta.setEstado("SUCCESS");
 				if(comision.getInscripcion().getInstancia().getIdInstancia() == 2) {
 					NotaComisionABM notaComisionABM = new NotaComisionABM();
 					notaComisionABM.agregarNota(comision, usuario, 10, notaCursada, fechaActual);
 				}
 			}
 			else {
-				respuestaWS.setError("No se realizo el alta de inscripcion del estudiante");
-				respuestaWS.setEstado("FAIL");
+				respuesta.setError("No se realizo el alta de inscripcion del estudiante");
+				respuesta.setEstado("FAIL");
 			}
 			
 		}
 
-		return respuestaWS;
+		return respuesta;
 		
 	}
 
 	// BAJA DE UN ESTUDIANTE EN UNA MATERIA DE UNA INSCRIPCION
 	@Override
-	public RespuestaWS bajaInscripcionEstudiante(int idDetalleInscripcion) {
+	public RespuestaDTO bajaInscripcionEstudiante(int idDetalleInscripcion) {
 		
 		DetalleInscripcionABM detalleInscripcionABM = new DetalleInscripcionABM();
 		
 		DetalleInscripcion detalleInscripcion = detalleInscripcionABM.traerDetalleInscripcion(idDetalleInscripcion);
 		
-		RespuestaWS respuestaWS = new RespuestaWS(
+		RespuestaDTO respuesta = new RespuestaDTO(
 				"No existe una inscripcion con el identificador especificado",
 				"EMPTY"
 		);
@@ -316,40 +316,40 @@ public class EstudiantesImpl implements Estudiantes{
 			}
 			
 			if(baja){
-				respuestaWS.setError("");
-				respuestaWS.setEstado("SUCCESS");
+				respuesta.setError("");
+				respuesta.setEstado("SUCCESS");
 			}
 			else {
-				respuestaWS.setError("No se realizo la baja del estudiante");
-				respuestaWS.setEstado("FAIL");
+				respuesta.setError("No se realizo la baja del estudiante");
+				respuesta.setEstado("FAIL");
 			}
 				
 		}
 
-		return respuestaWS;
+		return respuesta;
 	}
 	
 	// ACTUALIZACION DATOS DE ESTUDIANTE
 	@Override
-	public RespuestaWS actualizarDatosUsuario(int idUsuario, String correo, String celular, String clave) {
+	public RespuestaDTO actualizarDatosUsuario(int idUsuario, String correo, String celular, String clave) {
 	
 		UsuarioABM usuarioABM = new UsuarioABM();
 		Usuario usuario = usuarioABM.traerEstudiante(idUsuario);
 		
-		RespuestaWS respuestaWS = new RespuestaWS(
+		RespuestaDTO respuesta = new RespuestaDTO(
 				"El usuario no existe o no corresponde a un estudiante",
 				"EMPTY"
 		);
 		
 		if(usuario != null) {
 			
-			respuestaWS.setError("Falta especificar algunos de los parametros");
-			respuestaWS.setEstado("EMPTY");
+			respuesta.setError("Falta especificar algunos de los parametros");
+			respuesta.setEstado("EMPTY");
 			
 			if( (correo != "") && (celular != "") && (clave != "") ){
 				
-				respuestaWS.setError("");
-				respuestaWS.setEstado("SUCCESS");
+				respuesta.setError("");
+				respuesta.setEstado("SUCCESS");
 				
 				try {
 					usuario =  usuarioABM.actualizarDatosUsuario(idUsuario, correo, celular, clave);
@@ -362,7 +362,7 @@ public class EstudiantesImpl implements Estudiantes{
 			
 		}
 		
-		return respuestaWS;
+		return respuesta;
 		
 	}
 	

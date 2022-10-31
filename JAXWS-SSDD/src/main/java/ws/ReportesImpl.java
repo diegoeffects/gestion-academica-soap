@@ -14,6 +14,14 @@ import datos.Materia;
 import datos.NotaComision;
 import datos.Turno;
 import datos.Usuario;
+import dto.ComisionMateriaDTO;
+import dto.ComisionesMateriaDTO;
+import dto.EstudianteMateriaDTO;
+import dto.EstudiantesMateriaDTO;
+import dto.MateriaAprobadaDTO;
+import dto.MateriaInscripcionDTO;
+import dto.MateriasAprobadasDTO;
+import dto.MateriasInscripcionDTO;
 import negocio.CarreraABM;
 import negocio.ComisionABM;
 import negocio.DetalleInscripcionABM;
@@ -23,14 +31,6 @@ import negocio.MateriaABM;
 import negocio.NotaComisionABM;
 import negocio.TurnoABM;
 import negocio.UsuarioABM;
-import respuestas.ComisionMateriaWS;
-import respuestas.ComisionesMateriaWS;
-import respuestas.EstudianteMateriaWS;
-import respuestas.MateriaAprobadaWS;
-import respuestas.MateriaInscripcionWS;
-import respuestas.MateriasAprobadasWS;
-import respuestas.EstudiantesMateriaWS;
-import respuestas.MateriasInscripcionWS;
 
 @ServiceMode(value = javax.xml.ws.Service.Mode.MESSAGE)
 @HandlerChain(file="handler.xml")
@@ -39,12 +39,12 @@ public class ReportesImpl implements Reportes{
 	
 	// REPORTE ANALITICO DE ESTUDIANTE
 	@Override
-	public respuestas.MateriasAprobadasWS traerMateriasAprobadasPorEstudiante(int idUsuario) {
+	public dto.MateriasAprobadasDTO traerMateriasAprobadasPorEstudiante(int idUsuario) {
 		
 		UsuarioABM usuarioABM = new UsuarioABM();
 		Usuario usuario = usuarioABM.traerEstudiante(idUsuario);
 		
-		MateriasAprobadasWS materiasAprobadasWS = new MateriasAprobadasWS(
+		MateriasAprobadasDTO materiasAprobadasWS = new MateriasAprobadasDTO(
 				"El usuario no existe o no corresponde a un usuario con rol estudiante",
 				"EMPTY",
 				"",
@@ -62,11 +62,11 @@ public class ReportesImpl implements Reportes{
 			
 			List<NotaComision> historialAcademicoList = notaComisionABM.traerNotasComisionDefinitivasPorUsuario(idUsuario);
 			
-			List<MateriaAprobadaWS> materiasAprobadasList =  new ArrayList<MateriaAprobadaWS>();
+			List<MateriaAprobadaDTO> materiasAprobadasList =  new ArrayList<MateriaAprobadaDTO>();
 			
 			for (int i = 0; i < historialAcademicoList.size(); i++) {
 				
-				MateriaAprobadaWS materiaAprobada = new MateriaAprobadaWS(
+				MateriaAprobadaDTO materiaAprobada = new MateriaAprobadaDTO(
 						"(" + historialAcademicoList.get(i).getComision().getMateria().getIdMateria() +
 						") " + historialAcademicoList.get(i).getComision().getMateria().getMateria(),
 						historialAcademicoList.get(i).getComision().getUsuario().getApellido() + ", " + historialAcademicoList.get(i).getComision().getUsuario().getNombre(),
@@ -88,13 +88,13 @@ public class ReportesImpl implements Reportes{
 	
 	// REPORTE LISTADO DE ESTUDIANTES INSCRIPTOS
 	@Override
-	public respuestas.EstudiantesMateriaWS traerEstudiantesInscriptosPorMateria(int idComision) {
+	public dto.EstudiantesMateriaDTO traerEstudiantesInscriptosPorMateria(int idComision) {
 		
 		ComisionABM comisionABM = new ComisionABM();
 		
 		Comision comision = comisionABM.traerComision(idComision);
 		
-		EstudiantesMateriaWS estudiantesMateriaWS = new EstudiantesMateriaWS(
+		EstudiantesMateriaDTO estudiantesMateriaWS = new EstudiantesMateriaDTO(
 				"La comision no existe o no posee estudiantes asociados",
 				"EMPTY",
 				""
@@ -112,7 +112,7 @@ public class ReportesImpl implements Reportes{
 				estudiantesMateriaWS.setIdInstancia(String.valueOf(comision.getInscripcion().getInstancia().getIdInstancia()));
 				
 				NotaComisionABM notaComisionABM = new NotaComisionABM();
-				List<EstudianteMateriaWS> estudiantesInscriptosList = new ArrayList<EstudianteMateriaWS>();
+				List<EstudianteMateriaDTO> estudiantesInscriptosList = new ArrayList<EstudianteMateriaDTO>();
 				
 				for (int i = 0; i < estudiantes.size(); i++) {
 					
@@ -145,7 +145,7 @@ public class ReportesImpl implements Reportes{
 						
 					}
 					
-					EstudianteMateriaWS estudianteMateriaWS = new EstudianteMateriaWS(
+					EstudianteMateriaDTO estudianteMateriaWS = new EstudianteMateriaDTO(
 							i+1,
 							estudiantes.get(i).getUsuario().getApellido(),
 							estudiantes.get(i).getUsuario().getNombre(),
@@ -173,7 +173,7 @@ public class ReportesImpl implements Reportes{
 	
 	// REPORTE LISTADO DE MATERIAS POR INSCRIPCION, CARRERA Y TURNO
 	@Override
-	public respuestas.MateriasInscripcionWS traerMateriasPorInscripcionYCarreraYTurno(int idInscripcion, int idCarrera, int idTurno){
+	public dto.MateriasInscripcionDTO traerMateriasPorInscripcionYCarreraYTurno(int idInscripcion, int idCarrera, int idTurno){
 
 		InscripcionABM inscripcionABM = new InscripcionABM();
 		CarreraABM carreraABM = new CarreraABM();
@@ -183,7 +183,7 @@ public class ReportesImpl implements Reportes{
 		Carrera carrera = carreraABM.traerCarrera(idCarrera);
 		Turno turno = turnoABM.traerTurno(idTurno);
 	
-		MateriasInscripcionWS materiasInscripcionWS = new MateriasInscripcionWS(
+		MateriasInscripcionDTO materiasInscripcionWS = new MateriasInscripcionDTO(
 				"No existen materias asociadas para los parametros especificados",
 				"EMPTY",
 				"",
@@ -205,12 +205,12 @@ public class ReportesImpl implements Reportes{
 			
 			ComisionABM comisionABM = new ComisionABM();
 			List<Comision> comisiones =  comisionABM.traerComisionesPorInscripcionYCarreraYTurno(idInscripcion, idCarrera, idTurno);
-			List<MateriaInscripcionWS> materiasInscripcionList = new ArrayList<MateriaInscripcionWS>();
+			List<MateriaInscripcionDTO> materiasInscripcionList = new ArrayList<MateriaInscripcionDTO>();
 			
 		
 			for (int i = 0; i < comisiones.size(); i++) {
 				
-				MateriaInscripcionWS materiaInscripcion = new MateriaInscripcionWS(
+				MateriaInscripcionDTO materiaInscripcion = new MateriaInscripcionDTO(
 						comisiones.get(i).getMateria().getIdMateria(),
 						comisiones.get(i).getMateria().getMateria(),
 						String.valueOf(comisiones.get(i).getMateria().getIdMateria()) + "-" + String.valueOf(comisiones.get(i).getComision()),
@@ -235,7 +235,7 @@ public class ReportesImpl implements Reportes{
 	
 	// REPORTE LISTADO DE MATERIAS POR INSTANCIA Y MATERIA
 	@Override
-	public ComisionesMateriaWS traerComisionesPorInstanciaYMateria(int idInstancia, int idMateria){
+	public ComisionesMateriaDTO traerComisionesPorInstanciaYMateria(int idInstancia, int idMateria){
 		
 		InstanciaABM instanciaABM = new InstanciaABM();
 		MateriaABM materiaABM = new MateriaABM();
@@ -243,7 +243,7 @@ public class ReportesImpl implements Reportes{
 		Instancia instancia = instanciaABM.traerInstancia(idInstancia);
 		Materia materia = materiaABM.traerMateria(idMateria);
 		
-		ComisionesMateriaWS comisionesMateriaWS = new ComisionesMateriaWS(
+		ComisionesMateriaDTO comisionesMateriaWS = new ComisionesMateriaDTO(
 				"La materia no existe o no posee comisiones asociadas",
 				"EMPTY"
 		);
@@ -256,12 +256,12 @@ public class ReportesImpl implements Reportes{
 			ComisionABM comisionABM = new ComisionABM();
 		
 			List<Comision> comisiones = comisionABM.traerComisionesPorInstanciaYMateria(idInstancia, idMateria);
-			List<ComisionMateriaWS> comisionesMateriaList = new ArrayList<ComisionMateriaWS>();
+			List<ComisionMateriaDTO> comisionesMateriaList = new ArrayList<ComisionMateriaDTO>();
 			
 			
 			for (int i = 0; i < comisiones.size(); i++) {
 				
-				ComisionMateriaWS comisionMateriaWS = new ComisionMateriaWS(
+				ComisionMateriaDTO comisionMateriaWS = new ComisionMateriaDTO(
 						String.valueOf(comisiones.get(i).getIdComision()),
 						String.valueOf(comisiones.get(i).getMateria().getIdMateria()) + "-" + String.valueOf(comisiones.get(i).getComision())
 				);
