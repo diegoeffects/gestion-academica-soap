@@ -59,7 +59,6 @@ public class UsuarioDao {
 		return objeto;
 	}
 	
-	
 	// METODO TRAER USUARIOS
 	@SuppressWarnings("unchecked")
 	public List<Usuario> traerUsuarios() throws HibernateException{

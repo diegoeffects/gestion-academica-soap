@@ -111,7 +111,21 @@ public class NotaComisionDao {
 		return lista;
 	}
 	
-	
+	// AGREGAR NOTA COMISION
+	public int agregarNota(NotaComision objeto) {
+		int id = 0;
+		try {
+			iniciaOperacion(); //Crea la sesion y la transaccion 
+			id = Integer.parseInt(session.save(objeto).toString()); //Agregamos el objeto 
+			tx.commit(); //Y lo guardo tambien en la base de datos. 
+		} catch (HibernateException he) {
+			manejaExcepcion(he);
+			throw he;
+		} finally {
+			session.close(); //Cerramos la sesion 
+		}
+		return id;	
+	}
 	
 	
 }

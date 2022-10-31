@@ -3,7 +3,10 @@ package negocio;
 import java.util.List;
 
 import dao.NotaComisionDao;
+import datos.Comision;
 import datos.NotaComision;
+import datos.TipoNota;
+import datos.Usuario;
 
 public class NotaComisionABM {
 	
@@ -33,5 +36,17 @@ public class NotaComisionABM {
 	public List<NotaComision> traerNotasComisionDefinitivasPorUsuario(int idUsuario) {
 		return dao.traerNotasComisionDefinitivasPorUsuario(idUsuario);
 	}
+	
+	// AGREGAR NOTA COMISION
+	public int agregarNota(Comision comision, Usuario usuario, int idTipoNota, int nota, String fecha) {
+		
+		TipoNotaABM tipoNotaABM = new TipoNotaABM();
+		TipoNota tipoNota = tipoNotaABM.traerTipoNota(idTipoNota);
+		
+		NotaComision notaComision = new NotaComision(comision, usuario, tipoNota, nota, fecha);
+		
+		return dao.agregarNota(notaComision);
+	}
+	
 
 }

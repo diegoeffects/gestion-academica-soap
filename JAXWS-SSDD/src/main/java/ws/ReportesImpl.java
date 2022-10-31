@@ -120,13 +120,6 @@ public class ReportesImpl implements Reportes{
 					
 					String primerParcial = "";
 					String segundoParcial = "";
-					String tercerParcial = "";
-					String primerRecuperatorio = "";
-					String segundoRecuperatorio = "";
-					String tercerRecuperatorio = "";
-					String tp1 = "";
-					String tp2 = "";
-					String tp3 = "";
 					String notaCursada = "";
 					String notaFinal = "";
 					String notaDefinitiva = "";
@@ -139,27 +132,6 @@ public class ReportesImpl implements Reportes{
 						}
 						else if(notas.get(j).getTipoNota().getIdTipoNota() == 2) {
 							segundoParcial = String.valueOf(notas.get(j).getNota());
-						}
-						else if(notas.get(j).getTipoNota().getIdTipoNota() == 3) {
-							tercerParcial = String.valueOf(notas.get(j).getNota());
-						}
-						else if(notas.get(j).getTipoNota().getIdTipoNota() == 4) {
-							primerRecuperatorio = String.valueOf(notas.get(j).getNota());
-						}
-						else if(notas.get(j).getTipoNota().getIdTipoNota() == 5) {
-							segundoRecuperatorio = String.valueOf(notas.get(j).getNota());
-						}
-						else if(notas.get(j).getTipoNota().getIdTipoNota() == 6) {
-							tercerRecuperatorio = String.valueOf(notas.get(j).getNota());
-						}
-						else if(notas.get(j).getTipoNota().getIdTipoNota() == 7) {
-							tp1 = String.valueOf(notas.get(j).getNota());
-						}
-						else if(notas.get(j).getTipoNota().getIdTipoNota() == 8) {
-							tp2 = String.valueOf(notas.get(j).getNota());
-						}
-						else if(notas.get(j).getTipoNota().getIdTipoNota() == 9) {
-							tp3 = String.valueOf(notas.get(j).getNota());
 						}
 						else if(notas.get(j).getTipoNota().getIdTipoNota() == 10) {
 							notaCursada = String.valueOf(notas.get(j).getNota());
@@ -180,13 +152,6 @@ public class ReportesImpl implements Reportes{
 							estudiantes.get(i).getUsuario().getDni(),
 							primerParcial,
 							segundoParcial,
-							tercerParcial,
-							primerRecuperatorio,
-							segundoRecuperatorio,
-							tercerRecuperatorio,
-							tp1,
-							tp2,
-							tp3,
 							notaCursada,
 							notaFinal,
 							notaDefinitiva

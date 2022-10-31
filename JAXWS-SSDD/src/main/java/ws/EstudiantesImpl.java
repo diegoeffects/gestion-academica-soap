@@ -208,6 +208,8 @@ public class EstudiantesImpl implements Estudiantes{
 				"EMPTY"
 		);
 		
+		String fechaActual = "";
+		
 		for (int i = 0; i < inscripcionesVigentes.size(); i++) {
 			
 			if (idInscripcion == inscripcionesVigentes.get(i).getIdInscripcion()) {
@@ -225,12 +227,13 @@ public class EstudiantesImpl implements Estudiantes{
 			
 			boolean agregado = false;
 			boolean realizarInscripcion = false;
+			int notaCursada = 0;
 			
 			DetalleInscripcionABM detalleInscripcionABM = new DetalleInscripcionABM();
 			
 			Date date = new Date(); 
 		    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
-		    String fechaActual = dateFormat.format(date);
+		    fechaActual = dateFormat.format(date);
 		    
 		    if (comision.getInscripcion().getInstancia().getIdInstancia() == 1) {
 		    	realizarInscripcion = true;
@@ -249,6 +252,7 @@ public class EstudiantesImpl implements Estudiantes{
 						
 						if( (notas.get(i).getNota() >= 4) ) {
 							
+							notaCursada = notas.get(i).getNota();
 							realizarInscripcion = true;
 							
 						}
@@ -271,6 +275,10 @@ public class EstudiantesImpl implements Estudiantes{
 			if(agregado) {
 				respuestaWS.setError("");
 				respuestaWS.setEstado("SUCCESS");
+				if(comision.getInscripcion().getInstancia().getIdInstancia() == 2) {
+					NotaComisionABM notaComisionABM = new NotaComisionABM();
+					notaComisionABM.agregarNota(comision, usuario, 10, notaCursada, fechaActual);
+				}
 			}
 			else {
 				respuestaWS.setError("No se realizo el alta de inscripcion del estudiante");
@@ -301,7 +309,7 @@ public class EstudiantesImpl implements Estudiantes{
 			boolean baja = false;
 			
 			try {
-				baja = detalleInscripcionABM.bajaDetalleInscripcionBaja(detalleInscripcion);
+				baja = detalleInscripcionABM.bajaDetalleInscripcion(detalleInscripcion);
 			}
 			catch(Exception e) {
 				e.getMessage();
@@ -357,44 +365,5 @@ public class EstudiantesImpl implements Estudiantes{
 		return respuestaWS;
 		
 	}
-
-	// ACTUALIZACION DATOS DE ESTUDIANTE POR ADMINISTADOR
-	@Override
-	public RespuestaWS actualizarDatosUsuarioPorAdministrador(int idUsuario, String nombre, String apellido, String dni, String correo,
-			String celular) {
-		
-		UsuarioABM usuarioABM = new UsuarioABM();
-		Usuario usuario = usuarioABM.traerEstudiante(idUsuario);
-		
-		RespuestaWS respuestaWS = new RespuestaWS(
-				"El usuario no existe o no corresponde a un estudiante",
-				"EMPTY"
-		);
-		
-		if(usuario != null) {
-			
-			respuestaWS.setError("Falta especificar algunos de los parametros");
-			respuestaWS.setEstado("EMPTY");
-		
-			if( (nombre != "") && (apellido != "") && (dni != "") && (correo != "") && (celular != "") ){
-				
-				respuestaWS.setError("");
-				respuestaWS.setEstado("SUCCESS");
-			
-				try {
-					usuario =  usuarioABM.actualizarDatosUsuario(idUsuario, nombre, apellido, dni, correo, celular);
-				}
-				catch(Exception e) {
-					e.getMessage();
-					
-				}
-				
-			}
-			
-		}
-		
-		return respuestaWS;
-		
-	}
-
+	
 }

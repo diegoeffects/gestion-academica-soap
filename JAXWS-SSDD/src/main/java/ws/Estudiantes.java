@@ -38,10 +38,4 @@ public interface Estudiantes {
 	public RespuestaWS actualizarDatosUsuario(@WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "correo") String correo,
 			@WebParam(name = "celular") String celular, @WebParam(name = "clave") String clave);
 	
-	// ACTUALIZACION DATOS DE ESTUDIANTE POR ADMINISTADOR
-	@WebMethod
-	public RespuestaWS actualizarDatosUsuarioPorAdministrador(@WebParam(name = "idUsuario") int idUsuario, @WebParam(name = "nombre") String nombre,
-			@WebParam(name = "apellido") String apellido, @WebParam(name = "dni") String dni,
-			@WebParam(name = "correo") String correo, @WebParam(name = "celular") String celular);
-	
 }

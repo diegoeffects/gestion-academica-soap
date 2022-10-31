@@ -44,28 +44,5 @@ public class UsuarioABM {
 		return objeto;
 		
 	}
-	
-	// METODO MODIFICAR USUARIO
-	public Usuario actualizarDatosUsuario(int idUsuario, String nombre, String apellido, String dni, String correo, String celular) throws Exception {
-		
-		Usuario objeto = dao.traerUsuario(idUsuario);
-		
-		if (objeto == null) {
-			throw new Exception("MENSAJE: El ID ingresado no correponde a un usuario valido");
-		} // end_if
-		
-		objeto.setNombre(nombre);
-		objeto.setApellido(apellido);
-		objeto.setDni(dni);
-		objeto.setCelular(celular);
-		objeto.setCorreo(correo);
-		
-		if(dao.actualizarDatosUsuario(objeto)){
-			objeto = dao.traerUsuario(idUsuario);
-		}
-	
-		return objeto;
-		
-	}
 
 }

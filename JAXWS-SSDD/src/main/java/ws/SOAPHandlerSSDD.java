@@ -30,7 +30,6 @@ public class SOAPHandlerSSDD implements SOAPHandler<SOAPMessageContext> {
 
     @Override
     public boolean handleMessage(SOAPMessageContext smc) {
-        System.out.println("Handling soap message...");
      
         Boolean outboundProperty = (Boolean) smc
                 .get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);

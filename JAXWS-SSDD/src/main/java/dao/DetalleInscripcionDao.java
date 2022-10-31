@@ -113,7 +113,7 @@ public class DetalleInscripcionDao {
 	}
 	
 	// METODO BAJA DETALLE INSCRIPCION
-	public boolean bajaDetalleInscripcionBaja(DetalleInscripcion objeto) throws HibernateException {
+	public boolean bajaDetalleInscripcion(DetalleInscripcion objeto) throws HibernateException {
 		
 		boolean baja = false;
 		

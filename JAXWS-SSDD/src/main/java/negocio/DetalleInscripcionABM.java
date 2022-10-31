@@ -73,13 +73,13 @@ public class DetalleInscripcionABM {
 	}
 	
 	// METODO BAJA DETALLE INSCRIPCION
-	public boolean bajaDetalleInscripcionBaja(DetalleInscripcion objeto){
+	public boolean bajaDetalleInscripcion(DetalleInscripcion objeto){
 		
 		boolean baja = false;
 		
 		objeto.setBaja(true);
 		
-		if(dao.bajaDetalleInscripcionBaja(objeto)) {
+		if(dao.bajaDetalleInscripcion(objeto)) {
 			baja = true;
 		}
 		
