@@ -31,6 +31,7 @@ public class DetalleInscripcionABM {
 	// METODO AGREGAR DETALLE INSCRIPCION
 	public boolean agregarDetalleInscripcion(Inscripcion inscripcion, Comision comision, Usuario usuario, String fechaInscripcion, boolean baja) throws Exception {
 		
+		boolean noExisteSuperposicion = true;
 		boolean mismaInscripcion = false;
 		boolean superponeDia = false;
 		boolean superponeTurno = false;
@@ -50,19 +51,17 @@ public class DetalleInscripcionABM {
 				superponeDia = true;
 			}
 			
-		}
+			if( (mismaInscripcion) && (superponeTurno) && (superponeDia) ) {
+				noExisteSuperposicion = false;
+			}
 			
-		if( ((superponeDia == true) && (superponeTurno == true)) ) {
-			if(mismaInscripcion) {
-				resultado = false;
-			}
-			else {
-				DetalleInscripcion detalleInscripcion = new DetalleInscripcion(inscripcion, comision, usuario, fechaInscripcion, false);
-				dao.agregarDetalleInscripcion(detalleInscripcion);
-				resultado = true;
-			}
+			mismaInscripcion = false;
+			superponeDia = false;
+			superponeTurno = false;
+			
 		}
-		else {
+		
+		if(noExisteSuperposicion) {
 			DetalleInscripcion detalleInscripcion = new DetalleInscripcion(inscripcion, comision, usuario, fechaInscripcion, false);
 			dao.agregarDetalleInscripcion(detalleInscripcion);
 			resultado = true;

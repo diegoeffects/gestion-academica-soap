@@ -6,7 +6,7 @@
 <property name="hibernate.cache.use_query_cache">false</property>
 <property name="hibernate.enable_lazy_load_no_trans">true</property>
 <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-<!-- <property name="connection.url">jdbc:mysql://localhost/sga</property>
+<!--  <property name="connection.url">jdbc:mysql://localhost/sga</property>
 <property name="connection.username">root</property>
 <property name="connection.password">root</property> -->
 <!-- <property name="connection.url">jdbc:mysql://bjyszb039pnpsyqp6pjs-mysql.services.clever-cloud.com/bjyszb039pnpsyqp6pjs</property>

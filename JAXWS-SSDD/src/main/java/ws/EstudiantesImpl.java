@@ -228,6 +228,7 @@ public class EstudiantesImpl implements Estudiantes{
 			boolean agregado = false;
 			boolean realizarInscripcion = false;
 			int notaCursada = 0;
+			String fechaNotaCursada = "";
 			
 			DetalleInscripcionABM detalleInscripcionABM = new DetalleInscripcionABM();
 			
@@ -253,6 +254,7 @@ public class EstudiantesImpl implements Estudiantes{
 						if( (notas.get(i).getNota() >= 4) ) {
 							
 							notaCursada = notas.get(i).getNota();
+							fechaNotaCursada = notas.get(i).getFecha();
 							realizarInscripcion = true;
 							
 						}
@@ -277,7 +279,7 @@ public class EstudiantesImpl implements Estudiantes{
 				respuesta.setEstado("SUCCESS");
 				if(comision.getInscripcion().getInstancia().getIdInstancia() == 2) {
 					NotaComisionABM notaComisionABM = new NotaComisionABM();
-					notaComisionABM.agregarNota(comision, usuario, 10, notaCursada, fechaActual);
+					notaComisionABM.agregarNota(comision, usuario, 10, notaCursada, fechaNotaCursada);
 				}
 			}
 			else {
