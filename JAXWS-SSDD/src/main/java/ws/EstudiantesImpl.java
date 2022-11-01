@@ -166,6 +166,12 @@ public class EstudiantesImpl implements Estudiantes{
 				
 				for (int i = 0; i < materias.size(); i++) {
 					
+					String diaHorario = materias.get(i).getDia().getDia() + " " + materias.get(i).getRangoHorario();
+					
+					if(inscripcion.getInstancia().getIdInstancia() == 2) {
+						diaHorario = materias.get(i).getFecha() + " " + materias.get(i).getRangoHorario();
+					}
+					
 					MateriaInscripcionCarreraDTO materiaInscripcionCarrera = new MateriaInscripcionCarreraDTO(
 							String.valueOf(materias.get(i).getIdComision()),
 							materias.get(i).getMateria().getMateria(),
@@ -173,7 +179,7 @@ public class EstudiantesImpl implements Estudiantes{
 							", " + materias.get(i).getUsuario().getNombre(),
 							materias.get(i).getTurno().getTurno(),
 							String.valueOf(materias.get(i).getDia().getIdDia()),
-							materias.get(i).getDia().getDia() + " " + materias.get(i).getRangoHorario()
+							diaHorario
 					);
 						
 					materiasList.add(materiaInscripcionCarrera);
